@@ -204,5 +204,4 @@ public class Article extends BaseEntity<Integer> {
         this.createDate = createDate;
     }
 
-
 }

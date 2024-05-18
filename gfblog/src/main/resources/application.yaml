@@ -1,0 +1,60 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: gfblog
+  datasource:
+    url: jdbc:mysql://localhost:3306/assetment?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+    password: root
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write-dates-as-timestamps: true
+  web:
+    resources:
+      static-locations: classpath:static/,file:static/
+  main:
+    allow-circular-references: true
+  #整合freemarket
+  freemarker:
+#    settings:
+#      #处理空值
+##      classic_compatible: true
+#      datetime_format: yyy-MM-dd HH:mm:ss
+#      number_format: 0.##
+    suffix: .ftl
+    cache: true
+    content-type: text/html
+    charset: UTF-8
+#    template-loader-path:
+#      - classpath:/templates
+mybatis-plus:
+  type-aliases-package: com.blog.gfblog.pojo
+  configuration:
+    call-setters-on-nulls: true
+    map-underscore-to-camel-case: true
+    auto-mapping-behavier: full
+  mapper-location: classpath*:mapper/**/*Mapper.xml
+  global-config:
+    field-strategy: 0
+    banner: true
+    de-config:
+      id-type: uuid
+      logic-not-delete-value: 1
+      logic-delete-value: 0
+#分页插件配置
+pagehelper:
+  helper-dialect: mysql
+  support-methods-arguments: true
+
+#minio:
+#  name: minio
+#  accessKey: minioadmin
+#  secretKey: minioadmin
+#  bucketName: blog
+#  endpoint: http://121.37.28.93:9090/
+#  fileExt: png,jpg,jpeg,pdf,mp4
+
