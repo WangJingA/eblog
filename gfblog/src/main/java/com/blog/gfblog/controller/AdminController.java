@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.blog.gfblog.common.MinioCommon;
 import com.blog.gfblog.common.ResponseResult;
 import com.blog.gfblog.constant.AdminConstant;
+import com.blog.gfblog.entity.dto.AdminLoginDTO;
 import com.blog.gfblog.entity.dto.user.SystemInfoAndUserDetailDTO;
 import com.blog.gfblog.entity.dto.user.UserListPageDTO;
 import com.blog.gfblog.mapper.AdMapper;
@@ -19,6 +20,7 @@ import com.blog.gfblog.pojo.Ad;
 import com.blog.gfblog.pojo.SysUser;
 import com.blog.gfblog.service.*;
 import io.minio.ObjectWriteResponse;
+import io.swagger.annotations.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -30,6 +32,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@Api(tags = "易博客管理员功能接口文档")
 @RequestMapping( "/admin")
 public class AdminController {
     @Autowired
@@ -51,13 +54,19 @@ public class AdminController {
     @Autowired
     SysUserMapper sysUserMapper;
 
+    @ApiOperation("管理员-登录")
+    public ResponseResult adminLogin(@RequestBody @ApiParam AdminLoginDTO adminLoginDTO){
+        return null;
+    }
+
     /**
      * 管理员界面用户信息详情
      * @param userListPageDTO 查询dto
      * @return 用户详情
      */
+    @ApiOperation("管理员-用户管理-用户列表")
     @PostMapping("/list_user_info")
-    public ResponseResult listUserInfo(@RequestBody @Validated UserListPageDTO userListPageDTO){
+    public ResponseResult listUserInfo(@RequestBody @Validated @ApiParam UserListPageDTO userListPageDTO){
         LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotEmpty(userListPageDTO.getUserName())){
             queryWrapper.like(SysUser::getSysUserName,userListPageDTO.getUserName());
@@ -78,6 +87,7 @@ public class AdminController {
      * 管理员界面首页信息类
      * @return 首页信息详情
      */
+    @ApiOperation("管理员-主界面-用户和机器数据")
     @PostMapping( "/home_page_info")
     public ResponseResult adminIndex(){
         LambdaQueryWrapper<Ad> queryWrapper = new LambdaQueryWrapper<>();
@@ -107,6 +117,8 @@ public class AdminController {
      * @param file
      * @return
      */
+    @ApiOperation("管理员-上传头像")
+    @ApiImplicitParams(@ApiImplicitParam(value = "file",type = "File",required = true))
     @PostMapping("/upload_user_icon")
     public ResponseResult updload(@RequestBody MultipartFile file){
         String upload = minioCommon.upload(file, "blog");
@@ -118,6 +130,10 @@ public class AdminController {
      * @param userId 用户id
      * @return
      */
+    @ApiOperation("管理员-用户管理-删除用户")
+    @ApiImplicitParams(
+            @ApiImplicitParam(value = "userId",type = "String",required = true)
+    )
     @PostMapping("/del_user")
     public ResponseResult delUserByUserId(@RequestParam("userId") String userId){
         int delete = userMapper.deleteById(userId);
@@ -129,8 +145,9 @@ public class AdminController {
      * @param sysUser 用户信息
      * @return
      */
+    @ApiOperation("管理员-用户管理-修改用户信息")
     @PostMapping("/update_user")
-    public ResponseResult updateUserByUserId(@RequestBody SysUser sysUser){
+    public ResponseResult updateUserByUserId(@RequestBody @ApiParam SysUser sysUser){
         int update = sysUserMapper.updateById(sysUser);
         return ResponseResult.Success();
     }
@@ -140,8 +157,9 @@ public class AdminController {
      * @param sysUser 新增用户信息
      * @return
      */
+    @ApiOperation("管理员-用户管理-新增用户")
     @PostMapping("/add_user")
-    public ResponseResult addUser(@RequestBody SysUser sysUser){
+    public ResponseResult addUser(@RequestBody @ApiParam SysUser sysUser){
         sysUser.setSysUserId(UUID.randomUUID().toString());
         sysUserMapper.insert(sysUser);
         return ResponseResult.Success();

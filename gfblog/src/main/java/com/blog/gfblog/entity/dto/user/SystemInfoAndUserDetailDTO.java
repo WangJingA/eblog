@@ -1,6 +1,7 @@
 package com.blog.gfblog.entity.dto.user;
 
 import com.blog.gfblog.pojo.Ad;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * 首页数据
  */
 @Data
+@ApiModel
 @Accessors(chain = true)
 public class SystemInfoAndUserDetailDTO {
     /**

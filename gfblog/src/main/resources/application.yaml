@@ -1,6 +1,9 @@
 server:
   port: 8888
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   application:
     name: gfblog
   datasource:
@@ -50,11 +53,4 @@ pagehelper:
   helper-dialect: mysql
   support-methods-arguments: true
 
-#minio:
-#  name: minio
-#  accessKey: minioadmin
-#  secretKey: minioadmin
-#  bucketName: blog
-#  endpoint: http://121.37.28.93:9090/
-#  fileExt: png,jpg,jpeg,pdf,mp4
 
