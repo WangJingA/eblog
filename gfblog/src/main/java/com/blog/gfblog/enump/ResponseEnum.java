@@ -1,9 +1,11 @@
 package com.blog.gfblog.enump;
 
+import com.blog.gfblog.exception.BaseErrorInfoInterface;
+
 /**
  * 枚举所有的情况
  */
-public enum ResponseEnum {
+public enum ResponseEnum implements BaseErrorInfoInterface {
     FIND_SUCCESS(200,"查询成功！"),
     ELEVOTOR_SUCCESS(200,"操作成功！"),
     ADD_SUCCESS(200,"增加成功！"),
@@ -21,7 +23,8 @@ public enum ResponseEnum {
         this.msg = msg;
     }
 
-    public int getCode() {
+    @Override
+    public Integer getCode() {
         return code;
     }
 
@@ -29,6 +32,7 @@ public enum ResponseEnum {
         this.code = code;
     }
 
+    @Override
     public String getMsg() {
         return msg;
     }

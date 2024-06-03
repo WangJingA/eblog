@@ -113,7 +113,10 @@ public class MinioCommon {
         String fileName = file.getOriginalFilename();
         String[] split = fileName.split("\\.");
         if (split.length > 1) {
-            fileName = split[0] + "_" + System.currentTimeMillis() + "." + split[1];
+            int index = fileName.lastIndexOf(".");
+            fileName = fileName.substring(0,index-1) + "_" +
+                    System.currentTimeMillis() +
+                    fileName.substring(index);
         } else {
             fileName = fileName + System.currentTimeMillis();
         }
@@ -141,6 +144,8 @@ public class MinioCommon {
                 }
             }
         }
+        bucketNameStr = bucketNameStr.replaceAll("/","");
+        fileName = fileName.replaceAll("/","");
         return httpUrl + "/" + bucketNameStr + "/" + fileName;
     }
 

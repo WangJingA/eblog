@@ -5,6 +5,7 @@ package com.blog.gfblog.common;
 
 
 import com.blog.gfblog.enump.ResponseEnum;
+import io.swagger.models.auth.In;
 
 import java.io.Serializable;
 
@@ -17,8 +18,20 @@ public class ResponseResult<T> implements Serializable {
     private String msg;
     private T data;
   public static ResponseResult Success(){
-      return new ResponseResult(ResponseEnum.FIND_SUCCESS.getCode(), ResponseEnum.FIND_SUCCESS.getMsg(),null);
+      return new ResponseResult(ResponseEnum.FIND_SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(),null);
   }
+
+  public static  ResponseResult error(){
+      return new ResponseResult(500,"服务器内部错误");
+  }
+
+    public static  ResponseResult error(String errorMsg){
+        return new ResponseResult(500,errorMsg);
+    }
+
+    public static  ResponseResult error(Integer errorCode, String errorMsg){
+        return new ResponseResult(errorCode,errorMsg);
+    }
 
     public static ResponseResult Success(Object data){
         return new ResponseResult(200, "成功",data);

@@ -8,6 +8,7 @@ import cn.hutool.system.SystemUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.blog.gfblog.annotation.RequestLock;
 import com.blog.gfblog.common.MinioCommon;
 import com.blog.gfblog.common.ResponseResult;
 import com.blog.gfblog.constant.AdminConstant;
@@ -28,11 +29,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.Multipart;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @Api(tags = "易博客管理员功能接口文档")
+@ApiOperation("首页信息管理")
 @RequestMapping( "/admin")
 public class AdminController {
     @Autowired
@@ -145,6 +149,7 @@ public class AdminController {
      * @param sysUser 用户信息
      * @return
      */
+    @RequestLock(prefix = "update_user")
     @ApiOperation("管理员-用户管理-修改用户信息")
     @PostMapping("/update_user")
     public ResponseResult updateUserByUserId(@RequestBody @ApiParam SysUser sysUser){
@@ -161,6 +166,7 @@ public class AdminController {
     @PostMapping("/add_user")
     public ResponseResult addUser(@RequestBody @ApiParam SysUser sysUser){
         sysUser.setSysUserId(UUID.randomUUID().toString());
+        sysUser.setSysUserRegisterTime(LocalDateTime.now());
         sysUserMapper.insert(sysUser);
         return ResponseResult.Success();
     }

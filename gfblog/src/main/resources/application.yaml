@@ -32,6 +32,10 @@ spring:
     cache: true
     content-type: text/html
     charset: UTF-8
+  redis:
+    host: 121.37.28.93
+    port: 6379
+    password: hzxredis
 #    template-loader-path:
 #      - classpath:/templates
 mybatis-plus:
@@ -52,5 +56,14 @@ mybatis-plus:
 pagehelper:
   helper-dialect: mysql
   support-methods-arguments: true
+
+#线程池配置参数
+task:
+  pool:
+    corePoolSize: 5 #设置核心线程数
+    maxPoolSize: 20  #设置最大线程数
+    keepAliveSeconds: 300 #设置线程活跃时间（秒）
+    queueCapacity: 50 #设置队列容量
+
 
 

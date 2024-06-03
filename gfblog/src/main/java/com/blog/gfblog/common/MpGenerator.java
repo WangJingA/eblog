@@ -74,7 +74,7 @@ public class MpGenerator {
         pkConfig.setParent(PARENT_PACKAGE)
                 .setMapper(MAPPER_FOLERNAME)//dao
                 .setService(SERVICE_FOLERNAME)//servcie
-                .setController(CONTROLLER_FOLERNAME)//controller
+//                .setController(CONTROLLER_FOLERNAME)//controller
                 .setEntity(ENTITY_FOLERNAME)
                 .setXml(XML_FOLERNAME);//mapper.xml
 
