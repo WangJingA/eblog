@@ -65,5 +65,10 @@ task:
     keepAliveSeconds: 300 #设置线程活跃时间（秒）
     queueCapacity: 50 #设置队列容量
 
+jwt:
+  secretKey: ~@&^uu1879900#%!**
+  expireDay: 1
+
+
 
 

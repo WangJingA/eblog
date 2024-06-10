@@ -1,6 +1,5 @@
 package com.blog.gfblog.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -21,7 +20,7 @@ public class SysUser extends Model<SysUser> {
     /**
      * 用户id
      */
-    @TableId(value = "sys_user_id", type = IdType.AUTO)
+    @TableId(value = "sys_user_id")
     private String sysUserId;
 
     /**

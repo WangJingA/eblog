@@ -14,8 +14,7 @@ import java.io.IOException;
 
 public class MpGenerator {
     //对哪些表进行自动生成 , TABLENAME = {} 会对所有的表都进行生成
-    private static String[] TABLENAME = {"ad","ad_type","article","article_tag","article_tag_list",
-    "comment","comment_type","link","sys_user","article_type"};
+    private static String[] TABLENAME = {"sys_role_menu"};
 
     //作者信息，会自动添加到文件内
     private static String AUTHOR = "husir";

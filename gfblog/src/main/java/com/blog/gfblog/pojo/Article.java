@@ -21,7 +21,7 @@ public class Article extends Model<Article> {
     /**
      * 文章uuid
      */
-    @TableId(value = "article_id", type = IdType.AUTO)
+    @TableId("article_id")
     private String articleId;
 
     /**
@@ -33,6 +33,7 @@ public class Article extends Model<Article> {
      * 文字分类id
      */
     private String articleTypeId;
+
 
     /**
      * 文章标题

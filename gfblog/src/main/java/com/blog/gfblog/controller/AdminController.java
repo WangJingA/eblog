@@ -20,17 +20,14 @@ import com.blog.gfblog.mapper.SysUserMapper;
 import com.blog.gfblog.pojo.Ad;
 import com.blog.gfblog.pojo.SysUser;
 import com.blog.gfblog.service.*;
-import io.minio.ObjectWriteResponse;
+import com.blog.gfblog.service.impl.SysUserServiceImpl;
 import io.swagger.annotations.*;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.mail.Multipart;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,7 +47,7 @@ public class AdminController {
     @Autowired
     private ArticleTagListService articleTagListService;
     @Autowired
-    private SysUserService userService;
+    private SysUserServiceImpl userService;
     @Autowired
     private AdMapper adMapper;
     @Autowired
